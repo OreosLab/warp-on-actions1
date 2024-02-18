@@ -17,7 +17,7 @@ jobs:
 
   client-ipv4:
     runs-on: ubuntu-latest
-    name: client warp+doh mode
+    name: client warp+doh mode with ipv4
     steps:
       - name: Set up WARP with client with ipv4
         uses: OreosLab/warp-on-actions1@v1.0.1
