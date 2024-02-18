@@ -9,7 +9,7 @@ client warp+doh mode
     uses: fscarmen/warp-on-actions@latest
     with:
       mode: client  # Optional. Support [ client, wireguard ]. Default is client.
-      stack: dual   # Optional. Support [  ipv4, ipv6, dual ]. Default is dual.
+      stack: dual   # Optional. Support [ ipv4, ipv6, dual ]. Default is dual.
 ```
 
 ### Input Parameters
