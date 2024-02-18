@@ -9,6 +9,11 @@ inputs:
     required: false
     default: 'client'
 
+  stack:
+    description: 'Choose WARP stacks: IPv4/IPv6 only or dualstacks.'
+    required: false
+    default: 'dual'
+
 runs:
   using: composite
   steps:
@@ -23,6 +28,11 @@ runs:
           sudo apt-get install -y cloudflare-warp
           sudo warp-cli --accept-tos register
           sudo warp-cli --accept-tos set-mode warp+doh
+          if [ "${{ inputs.stack }}" == ipv4; then
+            sudo warp-cli --accept-tos add-excluded-route ::/0
+          elif [ "${{ inputs.stack }}" == ipv6; then
+            sudo warp-cli --accept-tos add-excluded-route 0.0.0.0/0
+          fi
           sudo warp-cli --accept-tos connect
 
         elif [ "${{ inputs.mode }}" == 'wireguard' ]; then
@@ -40,10 +50,15 @@ runs:
           MTU = 1280
           
           [Peer]
-          PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
-          AllowedIPs = 0.0.0.0/0
-          AllowedIPs = ::/0
-          Endpoint = 162.159.193.10:2408" | sed "s/^[ ]\+//g" | sudo tee /etc/wireguard/warp.conf
+          PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
+
+          if [ "${{ inputs.stack }}" != 'ipv4' ]; then
+            echo "AllowedIPs = ::/0" | sudo tee -a /etc/wireguard/warp.conf
+          elif [ "${{ inputs.stack }}" != 'ipv6' ]; then
+            echo "AllowedIPs = 0.0.0.0/0" | sudo tee -a /etc/wireguard/warp.conf
+          fi
+
+          echo "Endpoint = 162.159.193.10:2408" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
           sudo wg-quick up warp
 
         else
@@ -52,6 +67,7 @@ runs:
         fi
 
         sleep 1
-        sudo curl -s4m8 --retry 3 -A Mozilla https://api.ip.sb/geoip
+        echo "IPv4: $(sudo curl -s4m8 --retry 3 -A Mozilla https://api.ip.sb/geoip)"
+        echo "IPv6: $(sudo curl -s4m8 --retry 3 -A Mozilla https://api.ip.sb/geoip)"
 
       shell: bash
