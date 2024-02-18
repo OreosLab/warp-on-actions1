@@ -68,6 +68,6 @@ runs:
 
         sleep 1
         echo "IPv4: $(sudo curl -s4m8 --retry 3 -A Mozilla https://api.ip.sb/geoip)"
-        echo "IPv6: $(sudo curl -s4m8 --retry 3 -A Mozilla https://api.ip.sb/geoip)"
+        echo "IPv6: $(sudo curl -s6m8 --retry 3 -A Mozilla https://api.ip.sb/geoip)"
 
       shell: bash
