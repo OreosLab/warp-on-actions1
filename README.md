@@ -2,19 +2,19 @@
 
 * * *
 
-Usage:
-* client warp+doh mode
+### Usage example:
+client warp+doh mode
 ```
   - name: Set up WARP
-    uses: fscarmen/warp-on-actions@v1.0
+    uses: fscarmen/warp-on-actions@latest
     with:
-      mode: client  # Optional, default
+      mode: client  # Optional. Support [ client, wireguard ]. Default is client.
+      stack: dual   # Optional. Support [  ipv4, ipv6, dual ]. Default is dual.
 ```
 
-* wireguard
-```
-  - name: Set up WARP
-    uses: fscarmen/warp-on-actions@v1.0
-    with:
-      mode: wireguard
-```
+### Input Parameters
+
+| Parameter | **Mandatory**/**Optional** | Description |
+| --------- | -------- | ----------- |
+| mode | **Optional** | Install WARP mode: `client` is warp+doh mode, `wireguard` is wireguard mode. Default is `client`. |
+| stack | **Optional** | WARP stack: one of `ipv4`, `ipv6`,`dual`. Default is `dual`. |
