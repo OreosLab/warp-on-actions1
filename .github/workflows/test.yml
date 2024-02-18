@@ -10,13 +10,13 @@ on:
 
 jobs:
   client-by-default:
-    runs-on: ubuntu-v1.1
+    runs-on: ubuntu-latest
     name: client warp+doh mode by default
     steps:
       - uses: OreosLab/warp-on-actions1@v1.1
 
   client-ipv4:
-    runs-on: ubuntu-v1.1
+    runs-on: ubuntu-latest
     name: client warp+doh mode with ipv4
     steps:
       - name: Set up WARP with client with ipv4
