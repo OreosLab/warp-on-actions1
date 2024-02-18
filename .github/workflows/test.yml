@@ -15,20 +15,62 @@ jobs:
     steps:
       - uses: fscarmen/warp-on-actions@v1.0
 
-  client:
+  client-ipv4:
     runs-on: ubuntu-latest
     name: client warp+doh mode
+    steps:
+      - name: Set up WARP with client with ipv4
+        uses: fscarmen/warp-on-actions@v1.0
+        with:
+          mode: client
+          stack: ipv4
+
+  client-ipv6:
+    runs-on: ubuntu-latest
+    name: client warp+doh mode with ipv6
     steps:
       - name: Set up WARP with client
         uses: fscarmen/warp-on-actions@v1.0
         with:
           mode: client
+          stack: ipv6
 
-  wireguard:
+  client-dual:
     runs-on: ubuntu-latest
-    name: wireguard mode
+    name: client warp+doh mode with dual
+    steps:
+      - name: Set up WARP with client
+        uses: fscarmen/warp-on-actions@v1.0
+        with:
+          mode: client
+          stack: dual
+
+  wireguard-ipv4:
+    runs-on: ubuntu-latest
+    name: wireguard mode with ipv4
     steps:
       - name: Set up WARP with wireguard
         uses: fscarmen/warp-on-actions@v1.0
         with:
           mode: wireguard
+          stack: ipv4
+
+  wireguard-ipv6:
+    runs-on: ubuntu-latest
+    name: wireguard mode with ipv6
+    steps:
+      - name: Set up WARP with wireguard
+        uses: fscarmen/warp-on-actions@v1.0
+        with:
+          mode: wireguard
+          stack: ipv6
+
+  wireguard-dual:
+    runs-on: ubuntu-latest
+    name: wireguard mode with dual
+    steps:
+      - name: Set up WARP with wireguard
+        uses: fscarmen/warp-on-actions@v1.0
+        with:
+          mode: wireguard
+          stack: dual
