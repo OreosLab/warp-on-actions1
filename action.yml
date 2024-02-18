@@ -28,9 +28,9 @@ runs:
           sudo apt-get install -y cloudflare-warp
           sudo warp-cli --accept-tos register
           sudo warp-cli --accept-tos set-mode warp+doh
-          if [ "${{ inputs.stack }}" == ipv4; then
+          if [ "${{ inputs.stack }}" == 'ipv4' ]; then
             sudo warp-cli --accept-tos add-excluded-route ::/0
-          elif [ "${{ inputs.stack }}" == ipv6; then
+          elif [ "${{ inputs.stack }}" == 'ipv6' ]; then
             sudo warp-cli --accept-tos add-excluded-route 0.0.0.0/0
           fi
           sudo warp-cli --accept-tos connect
