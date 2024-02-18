@@ -53,12 +53,12 @@ runs:
           PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
 
           if [ "${{ inputs.stack }}" == 'ipv4' ]; then
-            echo "AllowedIPs = 0.0.0.0/0" | sudo tee -a /etc/wireguard/warp.conf
+            echo "AllowedIPs = 0.0.0.0/0" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
           elif [ "${{ inputs.stack }}" == 'ipv6' ]; then
-            echo "AllowedIPs = ::/0" | sudo tee -a /etc/wireguard/warp.conf
+            echo "AllowedIPs = ::/0" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
           else
             echo "AllowedIPs = 0.0.0.0/0
-            AllowedIPs = ::/0" | sudo tee -a /etc/wireguard/warp.conf
+            AllowedIPs = ::/0" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
           fi
 
           echo "Endpoint = 162.159.193.10:2408" | sed "s/^[ ]\+//g" | sudo tee -a /etc/wireguard/warp.conf
